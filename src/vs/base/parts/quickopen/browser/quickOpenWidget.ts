@@ -176,7 +176,7 @@ export class QuickOpenWidget implements IModelProvider {
 
 						const focus = this.tree.getFocus();
 						if (focus) {
-							this.elementSelected(focus, e, shouldOpenInBackground ? Mode.OPEN_IN_BACKGROUND : Mode.OPEN);
+							this.elementSelected(focus, e, keyboardEvent.keyCode === KeyCode.Enter ? Mode.OPEN_IN_BACKGROUND : Mode.OPEN);
 						}
 					}
 
@@ -251,7 +251,7 @@ export class QuickOpenWidget implements IModelProvider {
 					const quickNavKeys = this.quickNavigateConfiguration.keybindings;
 					const wasTriggerKeyPressed = keyCode === KeyCode.Enter || quickNavKeys.some((k) => {
 						if (k.hasShift() && keyCode === KeyCode.Shift) {
-							if (keyboardEvent.ctrlKey || keyboardEvent.altKey || keyboardEvent.metaKey) {
+							if (keyboardEvent.altKey || keyboardEvent.metaKey) {
 								return false; // this is an optimistic check for the shift key being used to navigate back in quick open
 							}
 
