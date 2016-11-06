@@ -139,12 +139,12 @@ export class DefaultController implements _.IController {
 
 		this.downKeyBindingDispatcher = new KeybindingDispatcher();
 		this.downKeyBindingDispatcher.set(KeyCode.Space, (t, e) => this.onSpace(t, e));
-		this.downKeyBindingDispatcher.set(KeyCode.UpArrow, (t, e) => this.onUp(t, e));
-		this.downKeyBindingDispatcher.set(KeyCode.PageUp, (t, e) => this.onPageUp(t, e));
-		this.downKeyBindingDispatcher.set(KeyCode.DownArrow, (t, e) => this.onDown(t, e));
-		this.downKeyBindingDispatcher.set(KeyCode.PageDown, (t, e) => this.onPageDown(t, e));
-		this.downKeyBindingDispatcher.set(KeyCode.LeftArrow, (t, e) => this.onLeft(t, e));
-		this.downKeyBindingDispatcher.set(KeyCode.RightArrow, (t, e) => this.onRight(t, e));
+		this.downKeyBindingDispatcher.set(KeyMod.WinCtrl | KeyCode.KEY_K, (t, e) => this.onUp(t, e));
+		this.downKeyBindingDispatcher.set(KeyMod.WinCtrl | KeyCode.KEY_B, (t, e) => this.onPageUp(t, e));
+		this.downKeyBindingDispatcher.set(KeyMod.WinCtrl | KeyCode.KEY_J, (t, e) => this.onDown(t, e));
+		this.downKeyBindingDispatcher.set(KeyMod.WinCtrl | KeyCode.KEY_F, (t, e) => this.onPageDown(t, e));
+		this.downKeyBindingDispatcher.set(KeyMod.WinCtrl | KeyCode.KEY_H, (t, e) => this.onLeft(t, e));
+		this.downKeyBindingDispatcher.set(KeyMod.WinCtrl | KeyCode.KEY_L, (t, e) => this.onRight(t, e));
 		this.downKeyBindingDispatcher.set(KeyCode.Escape, (t, e) => this.onEscape(t, e));
 
 		this.upKeyBindingDispatcher = new KeybindingDispatcher();
