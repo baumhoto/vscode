@@ -160,7 +160,8 @@ export class QuickOpenWidget implements IModelProvider {
 					}
 
 					// Pass tree navigation keys to the tree but leave focus in input field
-					else if (keyboardEvent.keyCode === KeyCode.DownArrow || keyboardEvent.keyCode === KeyCode.UpArrow || keyboardEvent.keyCode === KeyCode.PageDown || keyboardEvent.keyCode === KeyCode.PageUp) {
+					else if (keyboardEvent.ctrlKey && ( keyboardEvent.keyCode === KeyCode.KEY_J || keyboardEvent.keyCode === KeyCode.KEY_K
+								|| keyboardEvent.keyCode === KeyCode.KEY_F || keyboardEvent.keyCode === KeyCode.KEY_B)) {
 						DOM.EventHelper.stop(e, true);
 
 						this.navigateInTree(keyboardEvent.keyCode, keyboardEvent.shiftKey);
@@ -230,7 +231,8 @@ export class QuickOpenWidget implements IModelProvider {
 					}
 
 					// Support keyboard navigation in quick navigation mode
-					if (keyboardEvent.keyCode === KeyCode.DownArrow || keyboardEvent.keyCode === KeyCode.UpArrow || keyboardEvent.keyCode === KeyCode.PageDown || keyboardEvent.keyCode === KeyCode.PageUp) {
+					if (keyboardEvent.ctrlKey && ( keyboardEvent.keyCode === KeyCode.KEY_J || keyboardEvent.keyCode === KeyCode.KEY_K
+						|| keyboardEvent.keyCode === KeyCode.KEY_F || keyboardEvent.keyCode === KeyCode.KEY_B)) {
 						DOM.EventHelper.stop(e, true);
 
 						this.navigateInTree(keyboardEvent.keyCode);
@@ -309,11 +311,11 @@ export class QuickOpenWidget implements IModelProvider {
 	}
 
 	private shouldOpenInBackground(e: StandardKeyboardEvent): boolean {
-		if (e.keyCode !== KeyCode.RightArrow) {
+		if (e.keyCode !== KeyCode.KEY_L) {
 			return false; // only for right arrow
 		}
 
-		if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
+		if (e.metaKey || e.shiftKey || e.altKey) {
 			return false; // no modifiers allowed
 		}
 
@@ -346,7 +348,7 @@ export class QuickOpenWidget implements IModelProvider {
 			}
 
 			// Navigate
-			this.navigateInTree(next ? KeyCode.DownArrow : KeyCode.UpArrow);
+			this.navigateInTree(next ? KeyCode.KEY_J : KeyCode.KEY_K);
 		}
 	}
 
@@ -357,19 +359,19 @@ export class QuickOpenWidget implements IModelProvider {
 
 		// Normal Navigation
 		switch (keyCode) {
-			case KeyCode.DownArrow:
+			case KeyCode.KEY_J:
 				this.tree.focusNext();
 				break;
 
-			case KeyCode.UpArrow:
+			case KeyCode.KEY_K:
 				this.tree.focusPrevious();
 				break;
 
-			case KeyCode.PageDown:
+			case KeyCode.KEY_F:
 				this.tree.focusNextPage();
 				break;
 
-			case KeyCode.PageUp:
+			case KeyCode.KEY_B:
 				this.tree.focusPreviousPage();
 				break;
 
@@ -388,12 +390,12 @@ export class QuickOpenWidget implements IModelProvider {
 		if (entries.length > 1 && oldFocus === newFocus) {
 
 			// Up from no entry or first entry goes down to last
-			if (keyCode === KeyCode.UpArrow || (keyCode === KeyCode.Tab && isShift)) {
+			if (keyCode === KeyCode.KEY_K || (keyCode === KeyCode.Tab && isShift)) {
 				this.tree.focusLast();
 			}
 
 			// Down from last entry goes to up to first
-			else if (keyCode === KeyCode.DownArrow || keyCode === KeyCode.Tab && !isShift) {
+			else if (keyCode === KeyCode.KEY_J || keyCode === KeyCode.Tab && !isShift) {
 				this.tree.focusFirst();
 			}
 		}
